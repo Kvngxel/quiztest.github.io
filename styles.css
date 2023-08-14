@@ -42,3 +42,11 @@ body {
     text-align: center;
     margin: 10px auto 0; /* Add some spacing */
   }
+
+  .correct-answer {
+    background-color: #2ecc71; /* Green */
+  }
+  
+  .wrong-answer {
+    background-color: #e74c3c; /* Red */
+  }

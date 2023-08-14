@@ -11,18 +11,6 @@ class Quiz {
       return this.questions[this.currentQuestionIndex];
     }
 
-    restartQuiz() {
-      this.currentQuestionIndex = 0;
-      this.score = 0;
-      this.resetTimer();
-      this.answerSelected = false;
-      this.showQuestion(); // Display the first question again
-  
-      const nextButton = document.getElementById("next-button");
-      nextButton.style.display = "block"; // Show the Next button again
-      const restartButton = document.getElementById("restart-button");
-      // restartButton.style.display = "none"; // Hide the restart button
-    }
   
     startQuiz() {
       this.showQuestion();
@@ -32,7 +20,6 @@ class Quiz {
     }
   
     showQuestion() {
-        
       this.resetTimer();
       this.answerSelected = false;
   
@@ -49,6 +36,12 @@ class Quiz {
         button.classList.add("btn");
         button.addEventListener("click", () => {
           this.selectAnswer(answer);
+          // Add correct or wrong class to the selected button
+          if (answer.correct) {
+            button.classList.add("correct-answer");
+          } else {
+            button.classList.add("wrong-answer");
+          }
         });
         answerButtons.appendChild(button);
       });
