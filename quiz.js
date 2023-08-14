@@ -192,9 +192,3 @@ const questions = [
   restartButton.addEventListener("click", () => {
     window.location.reload(); // Reload the page
   });
-
-
-
-
-
-  
