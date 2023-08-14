@@ -10,6 +10,19 @@ class Quiz {
     getCurrentQuestion() {
       return this.questions[this.currentQuestionIndex];
     }
+
+    restartQuiz() {
+      this.currentQuestionIndex = 0;
+      this.score = 0;
+      this.resetTimer();
+      this.answerSelected = false;
+      this.showQuestion(); // Display the first question again
+  
+      const nextButton = document.getElementById("next-button");
+      nextButton.style.display = "block"; // Show the Next button again
+      const restartButton = document.getElementById("restart-button");
+      // restartButton.style.display = "none"; // Hide the restart button
+    }
   
     startQuiz() {
       this.showQuestion();
@@ -91,17 +104,20 @@ class Quiz {
         }
       }
   
-    nextQuestion() {
-      this.currentQuestionIndex++;
-      const resultsContainer = document.getElementById("results-container");
-      resultsContainer.innerHTML = "";
-  
-      if (this.currentQuestionIndex < this.questions.length) {
-        this.showQuestion();
-      } else {
-        this.showResults();
+      nextQuestion() {
+        this.currentQuestionIndex++;
+        const resultsContainer = document.getElementById("results-container");
+        resultsContainer.innerHTML = "";
+      
+        const nextButton = document.getElementById("next-button");
+      
+        if (this.currentQuestionIndex < this.questions.length) {
+          this.showQuestion();
+        } else {
+          this.showResults();
+          nextButton.style.display = "none"; // Hide the Next button
+        }
       }
-    }
   
     showResults() {
       const questionContainer = document.getElementById("question-container");
@@ -110,8 +126,16 @@ class Quiz {
       const scoreText = document.createElement("p");
       scoreText.textContent = `Your Score: ${this.score} out of ${this.questions.length}`;
       questionContainer.appendChild(scoreText);
+
+      const restartButton = document.getElementById("restart-button");
+      restartButton.style.display = "block"; // Show the restart button
+      restartButton.addEventListener("click", () => {
+        window.location.reload(); // Reload the page
+      });
     }
   }
+
+
   
 const questions = [
     {
@@ -163,4 +187,14 @@ const questions = [
   
   const quiz = new Quiz(questions);
   quiz.startQuiz();
+
+  const restartButton = document.getElementById("restart-button");
+  restartButton.addEventListener("click", () => {
+    window.location.reload(); // Reload the page
+  });
+
+
+
+
+
   
